@@ -1,0 +1,12 @@
+$text-small: 1rem;
+
+// app global css in SCSS form
+.text-small {
+  font-size: $text-small;
+}
+
+//to get rid of this ugly yellow outline while typing
+input:focus-visible {
+  outline: black auto 1px;
+  outline-offset: 0px;
+}
