@@ -1,2 +1,3 @@
 QUASAR:
 quasar dev -m electron
+quasar build -m electron

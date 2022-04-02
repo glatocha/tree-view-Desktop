@@ -18,7 +18,7 @@ ipcMain.on('ipc-rm-open-file-message', (e) => {
     console.log("OpenFile Command send")
     const options = {
         title: "Select file to open",
-        defaultPath: "user documents or last path",
+        defaultPath: "",
         filters: [
             { name: "TreeView files", extensions: ['json'] }
         ],
@@ -38,9 +38,27 @@ ipcMain.on('ipc-rm-open-file-message', (e) => {
     }
 })
 
-ipcMain.on('ipc-rm-save-file-message', (e) => {
+ipcMain.on('ipc-rm-save-file-message', (e, payload) => {
     console.log("SaveFile Command send")
-    e.returnValue = { fileName: "testFile" }
+    console.log(e)
+    console.log('payload :>> ', payload);
+    const options = {
+        title: "Save...",
+        defaultPath: "",
+        filters: [
+            { name: "TreeView files", extensions: ['json'] }
+        ],
+        properties: ['openFile']
+    }
+    const fileName = dialog.showSaveDialogSync(options) 
+    if (fileName) {
+        fs.writeFileSync(fileName, JSON.stringify(payload));
+        console.log("Save file name = " + fileName);
+        e.returnValue = { fileName: "testFile" }
+    } else {
+        console.log("Save file aborted");
+        e.returnValue = { error: true, message: "Save file aborted" };
+    }
 })
 
 

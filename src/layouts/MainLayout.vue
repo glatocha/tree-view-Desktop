@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpr fFf">
+  <q-layout view="hHh Lpr fFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -8,7 +8,7 @@
           <q-avatar rounded>
             <img src="../assets/favicon.png" />
           </q-avatar>
-          TreeView {{ filePath }}
+          TreeView{{ fileName ? " - " : "" }}{{ fileName }}
         </q-toolbar-title>
 
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
@@ -23,7 +23,7 @@
       bordered
       :width="70"
     >
-      <left-drawer-menu @file-open="openFile" />
+      <left-drawer-menu />
     </q-drawer>
 
     <q-drawer
@@ -44,7 +44,7 @@
     <q-footer elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <div class="text-small">Status and messages</div>
+          <status-messages />
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -55,17 +55,21 @@
 import { ref } from "vue";
 import LeftDrawerMenu from "../components/LeftDrawerMenu.vue";
 import TreeView from "../components/TreeView.vue";
+import StatusMessages from "../components/StatusMessages.vue";
 
 export default {
   components: {
     LeftDrawerMenu,
     TreeView,
+    StatusMessages,
   },
   data() {
-    return {
-      fileContent: "",
-      filePath: "",
-    };
+    return {};
+  },
+  computed: {
+    fileName() {
+      return this.$store.getters["tree/getFileName"];
+    },
   },
   setup() {
     const leftDrawerOpen = ref(true);
@@ -82,12 +86,6 @@ export default {
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
     };
-  },
-  methods: {
-    openFile(fileObj) {
-      this.fileContent = fileObj.fileContent;
-      this.filePath = fileObj.fileName;
-    },
   },
 };
 </script>

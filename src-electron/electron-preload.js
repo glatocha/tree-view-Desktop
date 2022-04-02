@@ -20,8 +20,8 @@ import { ipcRenderer, contextBridge } from "electron";
 contextBridge.exposeInMainWorld(
     'electron',
     {
-        sendMessage: (message) => {
-            return ipcRenderer.sendSync(message)
+        sendMessage: (message, ...args) => {
+            return ipcRenderer.sendSync(message, ...args)
         }
     }
 )

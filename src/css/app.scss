@@ -1,3 +1,10 @@
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap");
+
+@font-face {
+  font-family: Poppins;
+  src: url("./fonts/Poppins-Regular.ttf");
+}
+
 $text-small: 1rem;
 
 // app global css in SCSS form
@@ -9,4 +16,12 @@ $text-small: 1rem;
 input:focus-visible {
   outline: black auto 1px;
   outline-offset: 0px;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.q-dialog__backdrop {
+  background: rgba(0, 0, 0, 0.6);
 }

@@ -1,7 +1,9 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
-// import example from './module-example'
+import treeModule from './tree'
+import settingsModule from './settings'
+import messagesMdule from './messages'
 
 /*
  * If not building with SSR mode, you can
@@ -15,7 +17,9 @@ import { createStore } from 'vuex'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      // example
+      tree : treeModule,
+      settings : settingsModule,
+      messages : messagesMdule
     },
 
     // enable strict mode (adds overhead!)
